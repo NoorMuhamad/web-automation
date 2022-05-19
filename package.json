@@ -1,0 +1,14 @@
+{
+  "name": "web-automation",
+  "version": "1.0.0",
+  "description": "Design a system that working like auto take your user name and password of Facebook than like and share post as per your requirement",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NoorRasheed",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^14.1.0"
+  }
+}
