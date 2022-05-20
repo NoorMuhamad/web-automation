@@ -1,8 +1,10 @@
 const puppeteer = require('puppeteer');
 
 (async event => {
-  const key_words = 'JavaScript';
-  const link = 'https://www.google.com';
+  const email = '03008772984';
+  const password = 'Muhammad789786';
+  const wordForSearch = 'imported hakoomat na manzoor'
+  const link = 'https://www.facebook.com/';
 
   const browser = await puppeteer.launch({ headless: false, slowMo: 100, devtools: true });
 
@@ -13,65 +15,29 @@ const puppeteer = require('puppeteer');
 
     await page.goto(link);
 
-    await page.waitForSelector('div form div:nth-child(2) input');
-    await page.click('div form div:nth-child(2) input');
-    await page.keyboard.type(key_words);
+    // Facebook Login
+    await page.waitForSelector('.inputtext')
+    await page.click('.inputtext');
+    await page.keyboard.type(email);
+    await page.waitForSelector('#passContainer')
+    await page.click('#passContainer');
+    await page.keyboard.type(password);
     await page.keyboard.press('Enter');
 
-    await page.waitFor(3000);
+    // wait for two verifications 
+    await page.waitFor(60000);
+    // search as per your requirement
+    await page.waitForSelector('.mzan44vs')
+    await page.click('.mzan44vs');
+    await page.keyboard.type(wordForSearch);
+    await page.keyboard.press('Enter');
 
-    await page.waitForSelector(
-      '#main > div #center_col #search > div > div > div'
-    );
-    const url = await getHref(
-      page,
-      `#main > div #center_col #search > div > div > div a`
-    );
-
-    await page.goto(url, { waitUntil: 'domcontentloaded' });
-
-    await page.screenshot({
-      fullPage: true,
-      path: 'new_image.png'
-    });
-    const screenshotPath = process.cwd() + '/new_image.png';
-
-    console.log('URL of the page:', url);
-    console.log('Location of the screenshot:', screenshotPath);
-    await page.waitFor(30000);
+    await page.waitFor(60000);
+    
     await page.close();
     await browser.close();
   } catch (error) {
     console.log(error);
     await browser.close();
   }
-})();
-
-const getHref = (page, selector) =>
-  page.evaluate(
-    selector => document.querySelector(selector).getAttribute('href'),
-    selector
-  );
-
-
-
-
-  // this code about how to connect extension with puppeteer
-
-  const puppeteer = require('puppeteer');
-
-(async () => {
-  const pathToExtension = require('path').join(__dirname, 'my-extension');
-  const browser = await puppeteer.launch({
-    headless: false,
-    args: [
-      `--disable-extensions-except=${pathToExtension}`,
-      `--load-extension=${pathToExtension}`
-    ]
-  });
-  const targets = await browser.targets();
-  const backgroundPageTarget = targets.find(target => target.type() === 'background_page');
-  const backgroundPage = await backgroundPageTarget.page();
-  // Test the background page as you would any other page.
-  await browser.close();
 })();
