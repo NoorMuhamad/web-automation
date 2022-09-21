@@ -1,8 +1,8 @@
 const puppeteer = require('puppeteer');
 
 (async event => {
-  const email = '03008772984';
-  const password = 'Muhammad789786';
+  const email = ;
+  const password = '';
   const wordForSearch = 'imported hakoomat na manzoor'
   const link = 'https://www.facebook.com/';
 
